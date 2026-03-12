@@ -1,0 +1,2798 @@
+[
+    {
+        "id": "4f352a70d4a334d9",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "50360d7c0e3fe542",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d761d0b7b35433f8",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f055ba7ce1103cee",
+        "type": "junction",
+        "z": "50360d7c0e3fe542",
+        "x": 640,
+        "y": 1060,
+        "wires": [
+            [
+                "4d8e777fe15bbd81"
+            ]
+        ]
+    },
+    {
+        "id": "d2d852874d6cfed6",
+        "type": "junction",
+        "z": "50360d7c0e3fe542",
+        "x": 640,
+        "y": 1140,
+        "wires": [
+            [
+                "4d8e777fe15bbd81"
+            ]
+        ]
+    },
+    {
+        "id": "6ea1ba5ece3da71a",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "COM5",
+        "serialbaud": "9600",
+        "databits": 8,
+        "parity": "none",
+        "stopbits": 1,
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "100",
+        "bin": "false",
+        "out": "interbyte",
+        "addchar": "",
+        "responsetimeout": 10000
+    },
+    {
+        "id": "7299f778fdada30b",
+        "type": "inject",
+        "z": "4f352a70d4a334d9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "517644c3c8c1d940"
+            ]
+        ]
+    },
+    {
+        "id": "517644c3c8c1d940",
+        "type": "function",
+        "z": "4f352a70d4a334d9",
+        "name": "function 1",
+        "func": "var i = `         STANDARD REPORT        \n\nMACHINE ID          PN1503006389\nMACHINE SN          PN1503006389\n\nPRINT TIME   2023-08-23 17:09:14\nBEGIN        2023-08-23 17:09:12\nEND          2023-08-23 17:09:14\n\nOPERATOR ID                    1\nOPERATOR MODE                MIX\n\nDEPOSIT ID                      \nCUSTOMER ID                     \nDEPOSIT AMOUNT             30.00\n\nCURRENCY                     ZAR\n\n--------------------------------\n Counted Result:                \n DENOM         PCS      AMOUNT  \n ZAR 20     X    1  =        20 \n ZAR 10     X    1  =        10 \n\n--------------------------------\n AMOUNT          2  =        30 \n\n--------------------------------\n Sub Total:                  30 \n\n--------------------------------\n Total Result:                  \n Coin                      0.00 \n\n Total           2  =     30.00 \n\n--------------------------------\n\n\n\n\n\n\n\n\n\n`.split(/\\n/)\nfor (const iterator of i ){\n    node.send({ payload: iterator + \"\\r\"})\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 80,
+        "wires": [
+            [
+                "b01a33095386c0d5",
+                "3a26abae677ba655"
+            ]
+        ]
+    },
+    {
+        "id": "33fa9b33a07b800f",
+        "type": "serial in",
+        "z": "4f352a70d4a334d9",
+        "name": "",
+        "serial": "6ea1ba5ece3da71a",
+        "x": 290,
+        "y": 160,
+        "wires": [
+            [
+                "3a26abae677ba655"
+            ]
+        ]
+    },
+    {
+        "id": "b01a33095386c0d5",
+        "type": "serial out",
+        "z": "4f352a70d4a334d9",
+        "name": "",
+        "serial": "6ea1ba5ece3da71a",
+        "x": 430,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "3a26abae677ba655",
+        "type": "debug",
+        "z": "4f352a70d4a334d9",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d5975c69309ff97d",
+        "type": "debug",
+        "z": "4f352a70d4a334d9",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 260,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e0b55e54cb7d4ba4",
+        "type": "http in",
+        "z": "4f352a70d4a334d9",
+        "name": "",
+        "url": "/rcp*",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 300,
+        "wires": [
+            [
+                "d5975c69309ff97d",
+                "e5f7c366048d4b46"
+            ]
+        ]
+    },
+    {
+        "id": "9fc84e298b85f285",
+        "type": "http in",
+        "z": "4f352a70d4a334d9",
+        "name": "",
+        "url": "/ISAPI/*",
+        "method": "put",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 340,
+        "wires": [
+            [
+                "e5f7c366048d4b46",
+                "d5975c69309ff97d"
+            ]
+        ]
+    },
+    {
+        "id": "e5f7c366048d4b46",
+        "type": "http response",
+        "z": "4f352a70d4a334d9",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 280,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "aa3dfe4c1efcfd4c",
+        "type": "tcp out",
+        "z": "4f352a70d4a334d9",
+        "name": "",
+        "host": "",
+        "port": "",
+        "beserver": "reply",
+        "base64": false,
+        "end": false,
+        "tls": "",
+        "x": 270,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "df47f3de32cbdf4b",
+        "type": "tcp in",
+        "z": "4f352a70d4a334d9",
+        "name": "",
+        "server": "server",
+        "host": "",
+        "port": "8001",
+        "datamode": "single",
+        "datatype": "utf8",
+        "newline": "",
+        "topic": "",
+        "trim": false,
+        "base64": false,
+        "tls": "",
+        "x": 100,
+        "y": 160,
+        "wires": [
+            [
+                "aa3dfe4c1efcfd4c",
+                "d5975c69309ff97d"
+            ]
+        ]
+    },
+    {
+        "id": "02c599d839c9921b",
+        "type": "inject",
+        "z": "4f352a70d4a334d9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 520,
+        "y": 440,
+        "wires": [
+            [
+                "c0cc155946c812f0"
+            ]
+        ]
+    },
+    {
+        "id": "c0cc155946c812f0",
+        "type": "function",
+        "z": "4f352a70d4a334d9",
+        "name": "function 2",
+        "func": "msg = { \"_msgid\": \"bb029e815cbf331d\", \"payload\": \"102~1 Filter Coffee Regular R24\\nTotal R24\\nPaid R50\\nCASH PAYMENT\\n\\n2026-03-12T07:00:49.84&[object Object]\", \"topic\": \"GRCC - Gaming SMK\", \"method\": \"GET\", \"url\": \"https://ors-tsapi.hrs.oraclerestaurants.com/api/v1/checks?sinceTime=2026-03-12T05%3A47Z&includeClosed=true\", \"rvcRef\": 272, \"headers\": { \"date\": \"Thu, 12 Mar 2026 07:48:28 GMT\", \"content-type\": \"application/json; charset=utf-8\", \"transfer-encoding\": \"chunked\", \"connection\": \"keep-alive\", \"content-language\": \"en-US\", \"x-content-type-options\": \"nosniff\", \"x-envoy-upstream-service-time\": \"599\", \"strict-transport-security\": \"max-age=86400\", \"x-node-red-request-node\": \"7f9bb226\" }, \"statusCode\": 200, \"responseUrl\": \"https://ors-tsapi.hrs.oraclerestaurants.com/api/v1/checks?sinceTime=2026-03-12T05%3A47Z&includeClosed=true\", \"redirectList\": [], \"retry\": 0, \"itemInbound\": { \"header\": { \"rvcRef\": 272, \"checkRef\": \"763b15141dac48b7b20d5b38932aba4500001644\", \"checkNumber\": 272297, \"checkEmployeeRef\": 532, \"orderTypeRef\": 1, \"orderChannelRef\": 102, \"tableName\": \"\", \"tableGroupNumber\": 0, \"openTime\": \"2026-03-12T07:00:49.84\", \"guestCount\": 0, \"language\": \"en-US\", \"isTrainingCheck\": false, \"informationLines\": [], \"status\": \"closed\", \"preparationStatus\": \"Submitted\" }, \"menuItems\": [{ \"menuItemId\": 901511101, \"definitionSequence\": 1, \"name\": \"Filter Coffee Regular\", \"quantity\": 1, \"unitPrice\": 24, \"priceSequence\": 1, \"total\": 24, \"seat\": 1, \"surcharge\": 0, \"condiments\": [{ \"condimentId\": 999226003, \"definitionSequence\": 1, \"name\": \"Hot Milk\", \"quantity\": 1, \"unitPrice\": 0, \"priceSequence\": 1, \"total\": 0, \"seat\": 1, \"surcharge\": 0, \"isDefault\": false, \"atDefaultSetting\": false }] }], \"extensions\": [], \"taxes\": [{ \"taxRateId\": 1, \"name\": \"VAT 15 %\", \"total\": 3.13 }], \"tenders\": [{ \"tenderId\": 900110111, \"name\": \"CASH PAYMENT\", \"total\": 50, \"chargedTipTotal\": 0 }, { \"tenderId\": 900110111, \"name\": \"CASH PAYMENT\", \"total\": -26, \"chargedTipTotal\": 0 }], \"totals\": { \"subtotal\": 24, \"subtotalDiscountTotal\": 0, \"autoServiceChargeTotal\": 0, \"serviceChargeTotal\": 0, \"taxTotal\": 0, \"paymentTotal\": 24, \"totalDue\": 0 } }, \"orderChannelRef\": 102, \"checkNumber\": 272297, \"openTime\": \"2026-03-12T07:00:49.84\", \"_event\": \"node:267c0264eec3d11e\" }\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 440,
+        "wires": [
+            [
+                "0557880c7a1d6697",
+                "d4cce1572e7d0977"
+            ]
+        ]
+    },
+    {
+        "id": "80079b3e39c89282",
+        "type": "debug",
+        "z": "4f352a70d4a334d9",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "0557880c7a1d6697",
+        "type": "json",
+        "z": "4f352a70d4a334d9",
+        "name": "",
+        "property": "itemInbound",
+        "action": "",
+        "pretty": false,
+        "x": 750,
+        "y": 480,
+        "wires": [
+            [
+                "275773f3d11e9098"
+            ]
+        ]
+    },
+    {
+        "id": "d4cce1572e7d0977",
+        "type": "debug",
+        "z": "4f352a70d4a334d9",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "275773f3d11e9098",
+        "type": "function",
+        "z": "4f352a70d4a334d9",
+        "name": "function 3",
+        "func": "msg.itemInboundSize = msg.itemInbound.length\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 600,
+        "wires": [
+            [
+                "80079b3e39c89282"
+            ]
+        ]
+    },
+    {
+        "id": "439aa3760fc20173",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "function 1",
+        "func": "msg.payload = {\"items\": [JSON.parse(msg.payload)]};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 280,
+        "wires": [
+            [
+                "095bb6b44de7cf85",
+                "ba647e5de53aea49"
+            ]
+        ]
+    },
+    {
+        "id": "60a93dd6f4c67cfd",
+        "type": "http request",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 490,
+        "y": 240,
+        "wires": [
+            [
+                "439aa3760fc20173"
+            ]
+        ]
+    },
+    {
+        "id": "095bb6b44de7cf85",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "fa30826eddc421b1",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "get rcvRef grcr",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/tsc/locations/grcr/revenueCenters`\nmsg.rvcRef = 151\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 340,
+        "wires": [
+            [
+                "60a93dd6f4c67cfd"
+            ]
+        ]
+    },
+    {
+        "id": "2f65ea91def419b8",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "get Locations",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/${global.get('cfg.orgShortName')}/locations`\nmsg.rvcRef = 151\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 220,
+        "wires": [
+            [
+                "60a93dd6f4c67cfd"
+            ]
+        ]
+    },
+    {
+        "id": "77decbb2f93e2fc4",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "get rcvRef",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/tsc/locations/grcf/revenueCenters`\nmsg.rvcRef = 151\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 260,
+        "wires": [
+            [
+                "60a93dd6f4c67cfd"
+            ]
+        ]
+    },
+    {
+        "id": "6157325fbbe542b7",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "get rcvRef grct",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/tsc/locations/grct/revenueCenters`\nmsg.rvcRef = 151\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "60a93dd6f4c67cfd"
+            ]
+        ]
+    },
+    {
+        "id": "694b8533a60abb89",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "get Locations",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/checks/b6401913c43b49b691687956cdef0fc000001703`\nmsg.rvcRef = 271\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n    \"Simphony-LocRef\": \"grc\",\n    \"Simphony-OrgShortName\": \"tsc\",\n    \"Simphony-RvcRef\": msg.rvcRef\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 160,
+        "wires": [
+            [
+                "60a93dd6f4c67cfd",
+                "4dcc1320640e2076"
+            ]
+        ]
+    },
+    {
+        "id": "592908ca3f64c676",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 340,
+        "wires": [
+            [
+                "fa30826eddc421b1"
+            ]
+        ]
+    },
+    {
+        "id": "32a72d9f48843e4a",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "2f65ea91def419b8"
+            ]
+        ]
+    },
+    {
+        "id": "d82df569e9da47ab",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 260,
+        "wires": [
+            [
+                "77decbb2f93e2fc4"
+            ]
+        ]
+    },
+    {
+        "id": "ce683ab38518a39b",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 300,
+        "wires": [
+            [
+                "6157325fbbe542b7"
+            ]
+        ]
+    },
+    {
+        "id": "e2e91b9c9fcca373",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 160,
+        "wires": [
+            [
+                "694b8533a60abb89"
+            ]
+        ]
+    },
+    {
+        "id": "b7632a729e93260b",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "Authorize",
+        "func": "function formEncode(obj) {\n    return Object.entries(obj)\n        .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)\n        .join(\"&\");\n}\n\n// Base64URL encoding (RFC 4648 URL-safe alphabet, no padding)\nfunction base64url(buf) {\n    return Buffer.from(buf)\n        .toString(\"base64\")\n        .replace(/\\+/g, \"-\")\n        .replace(/\\//g, \"_\")\n        .replace(/=+$/g, \"\");\n}\n\nfunction runAuthenticate(origMsg) {\n    setTimeout(() => {\n        let cfg = global.get(\"cfg\");\n\n        const verifierBytes = crypto.randomBytes(32);\n        const code_verifier = base64url(verifierBytes);\n\n        const digest = crypto.createHash(\"sha256\").update(code_verifier, \"ascii\").digest();\n        const code_challenge = base64url(digest);\n\n        const qsObj = {\n            response_type: \"code\",\n            client_id: cfg.clientId,\n            scope: \"openid\",\n            redirect_uri: \"apiaccount://callback\",\n            code_challenge,\n            code_challenge_method: \"S256\"\n        };\n\n        global.set(\"code_verifier\", code_verifier);\n        global.set(\"qs\", qsObj);\n\n        const qs = formEncode(qsObj);\n\n        const msgOut = origMsg || {};\n        // msgOut.payload =\n        //     `curl -c cookiefilename --request GET ` +\n        //     `\"https://ors-idm.hrs.oraclerestaurants.com/oidc-provider/v1/oauth2/authorize?${qs}\"`;\n        msg.url = `${cfg.authHost}/oidc-provider/v1/oauth2/authorize?${qs}`\n        // IMPORTANT: use node.send from inside setTimeout\n        node.send(msgOut);\n    }, 100);\n}\n\nconst timeRequested = global.get(\"timeRequested\");\nconst token = global.get(\"token\");\n\nif (!timeRequested || !token || !token.expires_in) {\n    // node.warn(\"Token missing — need to request again\");\n    runAuthenticate(msg);\n    return null;\n}\n\n// expires_in is typically seconds -> convert to ms\nconst expiryTime = timeRequested + (Number(token.expires_in) * 1000);\n\nif (Date.now() >= expiryTime) {\n    // node.warn(\"Token expired — request again\");\n    runAuthenticate(msg);\n    return null;\n}\n\nnode.log(\"Token still valid — all good\");\nreturn null;\n\n// function formEncode(obj) {\n//     return Object.entries(obj)\n//         .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)\n//         .join(\"&\");\n// }\n\n// function runAuthenticate() {\n//     setTimeout(() => {\n//         global.set(\"cfg\", {\n//             authHost: \"https://ors-idm.hrs.oraclerestaurants.com\",\n//             apiBase: \"https://ors-tsapi.hrs.oraclerestaurants.com/api/v1/\",\n//             \",\n//             orgShortName: \"TSC\",  // Oracle forces to lowercase in some headers; we’ll lowercase later\n//             locRef: \"GRC | 2722\",        // header says it will be forced to lower-case :contentReference[oaicite:4]{index=4}\n//             rvcRef: 1443,              // pick one RVC ID to start (example)\n//             username: \"\",\n//             password: \"\"\n//         })\n\n//         var cfg = global.get(\"cfg\")\n\n//         // Base64URL encoding (RFC 4648 URL-safe alphabet, no padding)\n//         function base64url(buf) {\n//             return Buffer.from(buf)\n//                 .toString(\"base64\")\n//                 .replace(/\\+/g, \"-\")\n//                 .replace(/\\//g, \"_\")\n//                 .replace(/=+$/g, \"\");\n//         }\n\n//         // 1) code_verifier: 32 random bytes -> base64url (no padding)\n//         const verifierBytes = crypto.randomBytes(32);\n//         const code_verifier = base64url(verifierBytes);\n\n//         // 2) code_challenge: base64url( SHA-256( code_verifier ) )\n//         const digest = crypto.createHash(\"sha256\").update(code_verifier, \"ascii\").digest();\n//         const code_challenge = base64url(digest);\n\n//         var pkce = {\n//             code_verifier,\n//             code_challenge,\n//             code_challenge_method: \"S256\"\n//         };\n\n//         const qs = formEncode({\n//             response_type: \"code\",\n//             client_id: cfg.clientId,\n//             scope: \"openid\",\n//             redirect_uri: \"apiaccount://callback\",\n//             code_challenge: pkce.code_challenge,\n//             code_challenge_method: pkce.code_challenge_method\n//         });\n\n//         global.set('code_verifier', pkce.code_verifier)\n\n//         global.set('qs', {\n//             response_type: \"code\",\n//             client_id: cfg.clientId,\n//             scope: \"openid\",\n//             redirect_uri: \"apiaccount://callback\",\n//             code_challenge: pkce.code_challenge,\n//             code_challenge_method: pkce.code_challenge_method\n//         })\n\n//         msg.payload = `curl -c cookiefilename --request GET \"https://ors-idm.hrs.oraclerestaurants.com/oidc-provider/v1/oauth2/authorize?response_type=code&client_id=${global.get('cfg.clientId')}&scope=openid&redirect_uri=apiaccount%3A%2F%2Fcallback&code_challenge=${global.get('qs.code_challenge')}&code_challenge_method=${global.get('qs.code_challenge_method')}\"`\n//         return msg;\n//     }, 100);\n// }\n\n// const timeRequested = global.get('timeRequested');\n// const token = global.get('token');\n\n// if (!timeRequested || !token || !token.expires_in) {\n//     node.warn(\"Token missing — need to request again\");\n//     runAuthenticate();\n// } else {\n//     // expires_in is usually in seconds → convert to ms\n//     const expiryTime = timeRequested + (token.expires_in * 1000);\n\n//     if (Date.now() >= expiryTime) {\n//         node.warn(\"Token expired — request again\");\n//         runAuthenticate();\n//     } else {\n//         node.warn(\"Token good\");\n//         return null\n//     }\n// }\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
+        "x": 280,
+        "y": 420,
+        "wires": [
+            [
+                "95bd145f8cf0b206"
+            ]
+        ]
+    },
+    {
+        "id": "9a9101ed191048a8",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 420,
+        "wires": [
+            [
+                "b7632a729e93260b"
+            ]
+        ]
+    },
+    {
+        "id": "d5898426748996e7",
+        "type": "link in",
+        "z": "50360d7c0e3fe542",
+        "name": "Token Check Fail In",
+        "links": [],
+        "x": 155,
+        "y": 460,
+        "wires": [
+            [
+                "b7632a729e93260b"
+            ]
+        ]
+    },
+    {
+        "id": "95bd145f8cf0b206",
+        "type": "http request",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 430,
+        "y": 420,
+        "wires": [
+            [
+                "eec44164a3d64c67"
+            ]
+        ]
+    },
+    {
+        "id": "eec44164a3d64c67",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "Sign-In",
+        "func": "if (msg.statusCode === 200){\n    // Build \"Cookie: name=value; name2=value2\" from msg.redirectList cookies\nfunction cookiesToHeader(cookiesObj) {\n    if (!cookiesObj || typeof cookiesObj !== \"object\") return \"\";\n    const parts = [];\n\n    for (const [name, c] of Object.entries(cookiesObj)) {\n        if (!c) continue;\n        // Node-RED cookie objects commonly use .value\n        if (typeof c.value !== \"undefined\") {\n            parts.push(`${name}=${c.value}`);\n        }\n    }\n    return parts.join(\"; \");\n}\n\nlet cookieHeader = \"\";\n\n// Prefer the *last* redirect's cookies (most complete)\nif (Array.isArray(msg.redirectList) && msg.redirectList.length) {\n    const last = msg.redirectList[msg.redirectList.length - 1];\n    cookieHeader = cookiesToHeader(last.cookies);\n}\n\n// Fallback: some versions expose msg.cookies directly\nif (!cookieHeader && msg.cookies) {\n    cookieHeader = cookiesToHeader(msg.cookies);\n}\n\nflow.set(\"orsCookies\", cookieHeader);\nnode.status({ fill: \"green\", shape: \"dot\", text: `Cookies stored` });\n\n// Build the SIGNIN request like:\n// curl -b cookiefilename -X POST .../signin -H Content-Type: ... --data-urlencode ...\n\nconst cfg = global.get(\"cfg\");\n\n// Pull the cookie jar you stored from authorize (redirectList or set-cookie extraction)\nconst cookie = flow.get(\"orsCookies\") || global.get(\"orsCookies\") || cookieHeader;\n\nmsg.method = \"POST\";\nmsg.url = `${cfg.authHost}/oidc-provider/v1/oauth2/signin`;\n\n// Headers (this replaces curl -b cookiefilename and -H Content-Type)\nmsg.headers = {\n    \"Content-Type\": \"application/x-www-form-urlencoded\",\n    \"Cookie\": cookie\n};\n\n// Body (this replaces --data-urlencode ...)\n// encodeURIComponent does the same job as curl --data-urlencode for normal values.\nmsg.payload =\n    `username=${encodeURIComponent(cfg.username)}` +\n    `&password=${encodeURIComponent(cfg.password)}` +\n    `&orgname=${encodeURIComponent(cfg.orgShortName)}`;\n\nreturn msg;\n// return msg;\n    // msg.payload = `curl -b cookiefilename --request POST \"https://ors-idm.hrs.oraclerestaurants.com/oidc-provider/v1/oauth2/signin\" --header \"Content-Type: application/x-www-form-urlencoded\" --data-urlencode \"username=${global.get('cfg.username')}\" --data-urlencode \"password=${global.get('cfg.password')}\" --data-urlencode \"orgname=${global.get('cfg.orgShortName')}\"`\n    // return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 480,
+        "wires": [
+            [
+                "5e90e4df5ac7e6d8"
+            ]
+        ]
+    },
+    {
+        "id": "5e90e4df5ac7e6d8",
+        "type": "http request",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 450,
+        "y": 480,
+        "wires": [
+            [
+                "aef066168e4a3658"
+            ]
+        ]
+    },
+    {
+        "id": "aef066168e4a3658",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "Token",
+        "func": "const cfg = global.get(\"cfg\");\nconst resp = (typeof msg.payload === \"string\") ? JSON.parse(msg.payload) : msg.payload;\n\nif (!resp || resp.success !== true || !resp.redirectUrl) {\n    node.warn(\"Signin not successful or redirectUrl missing\");\n    return null;\n}\n\n// Extract query string after '?'\nvar redirectUrl = resp.redirectUrl;\nvar parts = redirectUrl.split(\"?\");\nif (parts.length < 2) {\n    node.warn(\"No query string in redirectUrl\");\n    return null;\n}\n\nvar query = parts[1]; // code=XXXX&state=YYYY\n\n// Manually extract code parameter\nvar codeVal = null;\nquery.split(\"&\").forEach(function(p) {\n    var kv = p.split(\"=\");\n    if (kv[0] === \"code\") {\n        codeVal = decodeURIComponent(kv[1] || \"\");\n    }\n});\n\nif (!codeVal) {\n    node.warn(\"Authorization code not found\");\n    return null;\n}\n\n// Retrieve stored cookies (curl -b equivalent)\nvar cookie = flow.get(\"orsCookies\") || global.get(\"orsCookies\") || \"\";\n\nmsg.method = \"POST\";\nmsg.url = `${cfg.authHost}/oidc-provider/v1/oauth2/token`;\n\nmsg.headers = {\n    \"Content-Type\": \"application/x-www-form-urlencoded\",\n    \"Cookie\": cookie\n};\n\n// Build clean form body (NO double code=)\nmsg.payload =\n    \"scope=openid\" +\n    \"&grant_type=authorization_code\" +\n    \"&client_id=\" + encodeURIComponent(cfg.clientId) +\n    \"&code_verifier=\" + encodeURIComponent(global.get(\"code_verifier\") || \"\") +\n    \"&code=\" + encodeURIComponent(codeVal) +\n    \"&redirect_uri=\" + encodeURIComponent(\"apiaccount://callback\");\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 540,
+        "wires": [
+            [
+                "f9794e7b342ca93b"
+            ]
+        ]
+    },
+    {
+        "id": "f9794e7b342ca93b",
+        "type": "http request",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 470,
+        "y": 540,
+        "wires": [
+            [
+                "5b9122b9fc71b558"
+            ]
+        ]
+    },
+    {
+        "id": "5b9122b9fc71b558",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "Storage",
+        "func": "var timeRequested = Date.now()\nconst formatted = new Intl.DateTimeFormat('en-GB', {\n    timeZone: 'Africa/Johannesburg',\n    year: 'numeric',\n    month: '2-digit',\n    day: '2-digit',\n    hour: '2-digit',\n    minute: '2-digit',\n    second: '2-digit',\n    timeZoneName: 'longOffset'\n}).format(new Date());\nglobal.set('timeRequested', timeRequested)\nglobal.set('token', JSON.parse(msg.payload))\n\nnode.status({ fill: \"green\", shape: \"dot\", text: `TOKEN Stored as ${formatted}`});\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 540,
+        "wires": [
+            [
+                "6cb39f73c5eae52f"
+            ]
+        ]
+    },
+    {
+        "id": "6cb39f73c5eae52f",
+        "type": "break director",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "actors": "",
+        "inputType": "msg",
+        "inputValue": "payload",
+        "lockType": "bool",
+        "lockValue": "true",
+        "unlockType": "else",
+        "unlockValue": "false",
+        "defaultState": true,
+        "useTimeOut": false,
+        "timeOut": "30",
+        "timeOutUnit": "s",
+        "x": 800,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4dcc1320640e2076",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "7d108b04f2bfe99d",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "401565763a365f9f",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 780,
+        "y": 160,
+        "wires": [
+            [
+                "e465d6f378b87498"
+            ]
+        ]
+    },
+    {
+        "id": "e465d6f378b87498",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "function 4",
+        "func": "global.set(\"cfg\", { \"authHost\": \"https://ors-idm.hrs.oraclerestaurants.com\", \"apiBase\": \"https://ors-tsapi.hrs.oraclerestaurants.com\", \"clientId\": \"\", \"orgShortName\": \"TSC\", \"locRef\": \"GRC\", \"username\": \"\", \"password\": \"$\" })\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 160,
+        "wires": [
+            [
+                "7d108b04f2bfe99d"
+            ]
+        ]
+    },
+    {
+        "id": "ba647e5de53aea49",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "function 5",
+        "func": "// Emits 1 message per payload.items[*] using node.send()\n// This works correctly through link out nodes.\n\nfunction isIterable(obj) {\n    return obj != null && typeof obj[Symbol.iterator] === \"function\";\n}\n\nfunction toArrayMaybe(value) {\n    if (value == null) return null;\n    if (Array.isArray(value)) return value;\n    if (isIterable(value)) return Array.from(value);\n    if (typeof value === \"object\" && Number.isInteger(value.length) && value.length >= 0) {\n        try { return Array.from(value); } catch (_) { return null; }\n    }\n    return null;\n}\n\nfunction buildReceiptForItem(item) {\n    const menuItemsArr = toArrayMaybe(item?.menuItems);\n\n    // Rule: menuItems missing/not iterable/empty => skip\n    if (!menuItemsArr || menuItemsArr.length === 0) return null;\n\n    let out = \"\";\n\n\n    // --- GROUP ITEMS ---\n    const grouped = {};\n\n    for (const mi of menuItemsArr) {\n        const id = mi?.menuItemId;\n        const name = mi?.name;\n        const qty = mi?.quantity ?? 0;\n        const unitPrice = mi?.unitPrice;\n\n        if (id == null || name == null || unitPrice == null) continue;\n\n        if (!grouped[id]) {\n            grouped[id] = {\n                name,\n                quantity: 0,\n                unitPrice\n            };\n        }\n\n        grouped[id].quantity += qty;\n    }\n\n    // --- PRINT GROUPED ITEMS ---\n    for (const g of Object.values(grouped)) {\n        out += `${g.quantity} x ${g.name} = R${g.unitPrice}\\n`;\n    }\n\n    const paymentTotal = item?.totals?.paymentTotal;\n    if (paymentTotal != null) out += `Total R${paymentTotal}\\n`;\n\n    const tendersArr = toArrayMaybe(item?.tenders);\n    const t0 = tendersArr && tendersArr.length > 0 ? tendersArr[0] : null;\n    const t1 = tendersArr && tendersArr.length > 1 ? tendersArr[1] : null;\n\n    if (t0?.total != null) out += `Paid R${t0.total}\\n`;\n    if (t1?.total != null) out += `Change R${t1.total}\\n`;\n    if (t0?.name != null) out += `${t0.name}\\n`;\n    if (t0?.referenceText != null) out += `${t0.referenceText.trim()}\\n`;\n\n    return out.length ? out : null;\n}\n\nfunction formatLocalTimePlus2(iso) {\n    if (!iso) return \"\";\n\n    const m = iso.match(\n        /^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})/\n    );\n    if (!m) return iso;\n\n    let [_, y, mo, d, h, mi, s] = m;\n\n    h = Number(h) + 2;\n\n    if (h >= 24) {\n        h -= 24;\n        const dt = new Date(`${y}-${mo}-${d}`);\n        dt.setDate(dt.getDate() + 1);\n        y = dt.getFullYear();\n        mo = String(dt.getMonth() + 1).padStart(2, \"0\");\n        d = String(dt.getDate()).padStart(2, \"0\");\n    }\n\n    return `${y}-${mo}-${d} ${String(h).padStart(2, \"0\")}:${mi}:${s}`;\n}\n\nconst itemsArr = toArrayMaybe(msg?.payload?.items);\nif (!itemsArr || itemsArr.length === 0) return null;\n\n\nfor (const item of itemsArr) {\n    msg.itemInbound = item;\n    const orderChannelRef = item?.header?.orderChannelRef;\n    const checkNumber = item?.header?.checkNumber;\n    const openTime = formatLocalTimePlus2(item?.header?.openTime);\n\n    const receipt = buildReceiptForItem(item);\n    if (receipt == null) continue;\n\n    const m = {\n        ...msg,\n        payload: `${orderChannelRef ?? \"\"}~Check no. ${checkNumber}\\n${receipt}\\n${openTime}`,\n        orderChannelRef,\n        checkNumber,\n        openTime,\n    };\n\n    node.send(m);\n}\n\n// IMPORTANT: when using node.send in a Function node:\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 320,
+        "wires": [
+            [
+                "8b327be8e87c5c43",
+                "9c451c3e9575af19"
+            ]
+        ]
+    },
+    {
+        "id": "8b327be8e87c5c43",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "c9f186b1e44ce220",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "formatted ",
+        "func": "// Emits 1 message per payload.items[*] using node.send()\n// This works correctly through link out nodes.\n\nfunction isIterable(obj) {\n  return obj != null && typeof obj[Symbol.iterator] === \"function\";\n}\n\nfunction toArrayMaybe(value) {\n  if (value == null) return null;\n  if (Array.isArray(value)) return value;\n  if (isIterable(value)) return Array.from(value);\n  if (typeof value === \"object\" && Number.isInteger(value.length) && value.length >= 0) {\n    try { return Array.from(value); } catch (_) { return null; }\n  }\n  return null;\n}\n\nfunction buildReceiptForItem(item) {\n  const menuItemsArr = toArrayMaybe(item?.menuItems);\n\n  // Rule: menuItems missing/not iterable/empty => skip\n  if (!menuItemsArr || menuItemsArr.length === 0) return null;\n\n  let out = \"\";\n\n\n  // --- GROUP ITEMS ---\n  const grouped = {};\n\n  for (const mi of menuItemsArr) {\n    const id = mi?.menuItemId;\n    const name = mi?.name;\n    const qty = mi?.quantity ?? 0;\n    const unitPrice = mi?.unitPrice;\n\n    if (id == null || name == null || unitPrice == null) continue;\n\n    if (!grouped[id]) {\n      grouped[id] = {\n        name,\n        quantity: 0,\n        unitPrice\n      };\n    }\n\n    grouped[id].quantity += qty;\n  }\n\n  // --- PRINT GROUPED ITEMS ---\n  for (const g of Object.values(grouped)) {\n    out += `${g.quantity} x ${g.name} = R${g.unitPrice}\\n`;\n  }\n\n  const paymentTotal = item?.totals?.paymentTotal;\n  if (paymentTotal != null) out += `Total R${paymentTotal}\\n`;\n\n  const tendersArr = toArrayMaybe(item?.tenders);\n  const t0 = tendersArr && tendersArr.length > 0 ? tendersArr[0] : null;\n  const t1 = tendersArr && tendersArr.length > 1 ? tendersArr[1] : null;\n\n  if (t0?.total != null) out += `Paid R${t0.total}\\n`;\n  if (t1?.total != null) out += `Change R${t1.total}\\n`;\n  if (t0?.name != null) out += `${t0.name}\\n`;\n  if (t0?.referenceText != null) out += `${t0.referenceText.trim()}\\n`;\n\n  return out.length ? out : null;\n}\n\nfunction formatLocalTimePlus2(iso) {\n  if (!iso) return \"\";\n\n  const m = iso.match(\n    /^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})/\n  );\n  if (!m) return iso;\n\n  let [_, y, mo, d, h, mi, s] = m;\n\n  h = Number(h) + 2;\n\n  if (h >= 24) {\n    h -= 24;\n    const dt = new Date(`${y}-${mo}-${d}`);\n    dt.setDate(dt.getDate() + 1);\n    y = dt.getFullYear();\n    mo = String(dt.getMonth() + 1).padStart(2, \"0\");\n    d = String(dt.getDate()).padStart(2, \"0\");\n  }\n\n  return `${y}-${mo}-${d} ${String(h).padStart(2, \"0\")}:${mi}:${s}`;\n}\n\nconst itemsArr = toArrayMaybe(msg?.payload?.items);\nif (!itemsArr || itemsArr.length === 0) return null;\n\n\nfor (const item of itemsArr) {\n  msg.itemInbound = item;\n  const orderChannelRef = item?.header?.orderChannelRef;\n  const checkNumber = item?.header?.checkNumber;\n  const openTime = formatLocalTimePlus2(item?.header?.openTime);\n\n  const receipt = buildReceiptForItem(item);\n  if (receipt == null) continue;\n\n  const m = {\n    ...msg,\n    payload: `${orderChannelRef ?? \"\"}~Check no. ${checkNumber}\\n${receipt}\\n${openTime}`,\n    orderChannelRef,\n    checkNumber,\n    openTime,\n  };\n\n  node.send(m);\n}\n\n// IMPORTANT: when using node.send in a Function node:\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 660,
+        "wires": [
+            [
+                "442a824bcc02d73c"
+            ]
+        ]
+    },
+    {
+        "id": "b52e870a5eee3a6e",
+        "type": "rbe",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 950,
+        "y": 660,
+        "wires": [
+            [
+                "c9f186b1e44ce220",
+                "446eaa6de113aa92"
+            ]
+        ]
+    },
+    {
+        "id": "afa9519a89f91fda",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "GRCC - Billy G",
+        "func": "function formEncode(obj) {\n    return Object.entries(obj)\n        .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)\n        .join(\"&\");\n}\nfunction getSinceTimeMinusOneMinute() {\n    return new Date(Date.now() - msg.payload)\n        .toISOString()\n        .slice(0, -8) + \"Z\";\n}\nmsg.topic = \"GRCC - Billy G\"\n\nvar sinceTime = new Date()\nconst qsObj = {\n    // \"checkEmployeeRef\": interger,\n    // \"checkNumbers\": array[integers],\n    // \"includeClosed\": boolean,\n    // \"orderTypeRef\": integer,\n    // \"tableName\": string\n    \"sinceTime\": getSinceTimeMinusOneMinute(),\n    \"includeClosed\": true,\n};\n\nconst qs = formEncode(qsObj);\n\nmsg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/checks?${qs}`\nmsg.rvcRef = 271\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n    \"Simphony-LocRef\": \"grc\",\n    \"Simphony-OrgShortName\": \"tsc\",\n    \"Simphony-RvcRef\": msg.rvcRef\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 660,
+        "wires": [
+            [
+                "e22734755d22f23c"
+            ]
+        ]
+    },
+    {
+        "id": "e22734755d22f23c",
+        "type": "http request",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": true,
+        "headers": [],
+        "x": 530,
+        "y": 660,
+        "wires": [
+            [
+                "189210bfb3e0c84d",
+                "06293d8589b23fe5",
+                "ada52d9fc47166cf"
+            ]
+        ]
+    },
+    {
+        "id": "189210bfb3e0c84d",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "GRCC - Billy G",
+        "func": "msg.payload = JSON.parse(msg.payload);\nif (msg.statusCode !== 200) {\n    node.status({ fill: \"red\", shape: \"dot\", text: `error: ${msg.statusCode}` });\n    node.error(`Revenue Centre ${msg.rvcRef} ${msg.payload.title} : ${msg.payload.detail}`, msg);\n    return null\n}\nelse {\n    node.status({ fill: \"green\", shape: \"dot\", text: `success: ${msg.statusCode}` });\n    if (msg.payload.items.length !== 0) {\n        \n        return msg\n        // for (const iterator of msg.payload.items) {\n        //     // node.warn(iterator.header)\n        //     msg.payload = iterator\n        //     node.send(msg)\n        //     // if (iterator.header.status === \"closed\"){\n        //     //     return msg\n        //     // }\n        // }\n        // return null\n    }\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 660,
+        "wires": [
+            [
+                "b52e870a5eee3a6e",
+                "32b9444d6220aece",
+                "a08e63a22df72dc6"
+            ]
+        ]
+    },
+    {
+        "id": "a2d33a77b2e24fef",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "60000000",
+        "payloadType": "num",
+        "x": 140,
+        "y": 660,
+        "wires": [
+            [
+                "afa9519a89f91fda"
+            ]
+        ]
+    },
+    {
+        "id": "32b9444d6220aece",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "446eaa6de113aa92",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "442a824bcc02d73c",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1270,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "fe65f8ce64b6e547",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 240,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "955a184232dc093f",
+        "type": "catch",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 80,
+        "y": 40,
+        "wires": [
+            [
+                "fe65f8ce64b6e547"
+            ]
+        ]
+    },
+    {
+        "id": "4d8e777fe15bbd81",
+        "type": "http request",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 630,
+        "y": 940,
+        "wires": [
+            [
+                "a81eb1e069db1b24",
+                "117440f298e8ec7c"
+            ]
+        ]
+    },
+    {
+        "id": "5241e6bdf0f0e340",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "DELETE notifications/discovery",
+        "func": "msg.method = \"DELETE\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/notifications/subscriptions`\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 880,
+        "wires": [
+            [
+                "4d8e777fe15bbd81"
+            ]
+        ]
+    },
+    {
+        "id": "7dafae7936a56892",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "GET notifications/subscriptions",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/notifications/subscriptions`\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 920,
+        "wires": [
+            [
+                "4d8e777fe15bbd81"
+            ]
+        ]
+    },
+    {
+        "id": "ae034f4ee18e059a",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "integrator registeration",
+        "func": "msg.method = \"PUT\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/notifications/registration`\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = {\n  \"keyId\": \"8f8e9f9c-a130-4d06-8a4b-33d525be9d5b\",\n  \"hmacKey\": \"KIRP2rqOEyb2v/2MLZUcWnQfHqzvk+GZlv0l92pek6g=\",\n  \"keyType\": \"hmac-sha256\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 840,
+        "wires": [
+            [
+                "4d8e777fe15bbd81"
+            ]
+        ]
+    },
+    {
+        "id": "ef26ae6319665d3f",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "organizations",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations`\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 960,
+        "wires": [
+            [
+                "4d8e777fe15bbd81"
+            ]
+        ]
+    },
+    {
+        "id": "18f41d9079a32d01",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "organizations/tsc/locations",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/tsc/locations`\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 1000,
+        "wires": [
+            [
+                "4d8e777fe15bbd81"
+            ]
+        ]
+    },
+    {
+        "id": "a81eb1e069db1b24",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "117440f298e8ec7c",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "function 1",
+        "func": "msg.payload = JSON.parse(msg.payload);\n// node.warn(JSON.parse(msg.payload).items[0].toString())\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 940,
+        "wires": [
+            [
+                "b4565227fe894d53"
+            ]
+        ]
+    },
+    {
+        "id": "dc05118e031252c1",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "rc",
+                "v": "{\"code\":0}",
+                "vt": "json"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 880,
+        "wires": [
+            [
+                "5241e6bdf0f0e340"
+            ]
+        ]
+    },
+    {
+        "id": "6fef3cfdaf41ebca",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "rc",
+                "v": "{\"code\":0}",
+                "vt": "json"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 920,
+        "wires": [
+            [
+                "7dafae7936a56892"
+            ]
+        ]
+    },
+    {
+        "id": "f441c5d2062aa728",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "rc",
+                "v": "{\"code\":0}",
+                "vt": "json"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 840,
+        "wires": [
+            [
+                "ae034f4ee18e059a"
+            ]
+        ]
+    },
+    {
+        "id": "c09791b7e83c1a22",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "rc",
+                "v": "{\"code\":0}",
+                "vt": "json"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 960,
+        "wires": [
+            [
+                "ef26ae6319665d3f"
+            ]
+        ]
+    },
+    {
+        "id": "628fd763b351ed0a",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "rc",
+                "v": "{\"code\":0}",
+                "vt": "json"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 1000,
+        "wires": [
+            [
+                "18f41d9079a32d01"
+            ]
+        ]
+    },
+    {
+        "id": "526a2e3e1ed9921d",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "organizations/tsc/locations/grct/revenueCenters",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/tsc/locations/grc/revenueCenters`\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 1060,
+        "wires": [
+            [
+                "f055ba7ce1103cee"
+            ]
+        ]
+    },
+    {
+        "id": "bb968e9253c06218",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "notifications/subscriptions",
+        "func": "msg.method = \"POST\"\nmsg.headers = {\n    \"Authorization\": `Bearer ${global.get('token.id_token')}`\n}; \n\nif (msg.url === 'https://ors-tsapi.hrs.oraclerestaurants.com/api/v1/organizations/tsc/locations/grc/revenueCenters') {\n\n    msg.url = `${global.get('cfg.apiBase')}/api/v1/notifications/subscriptions`\n\n    for (const iterator of msg.payload.items) {\n        msg.payload = {\n            \"callbackUri\": \"https://webhook.site/0f3ff542-0dc8-4f14-bc5a-587c49cfc9d1\",\n            \"messageType\": {\n                \"id\": \"CheckNotification\"\n            },\n            \"postOfficeOptions\": {\n                \"PostOfficeType\": \"PushOnePostOffice\"\n            },\n            \"orgShortName\": \"tsc\",\n            \"locRef\": \"grc\",\n            \"rvcRef\": iterator.rvcRef.toString()\n        }\n        node.send(msg)\n        // return msg;\n    }\n} else { return null}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 1100,
+        "wires": [
+            [
+                "f055ba7ce1103cee"
+            ]
+        ]
+    },
+    {
+        "id": "b4565227fe894d53",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "ead0c0be44156182",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "rc",
+                "v": "{\"code\":0}",
+                "vt": "json"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 1060,
+        "wires": [
+            [
+                "526a2e3e1ed9921d"
+            ]
+        ]
+    },
+    {
+        "id": "03950261f3836a0e",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "organizations/tsc/locations/grct/revenueCenters",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/tsc/locations/grcf/revenueCenters`\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 1140,
+        "wires": [
+            [
+                "d2d852874d6cfed6"
+            ]
+        ]
+    },
+    {
+        "id": "6e7b0779bd7534d0",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "notifications/subscriptions",
+        "func": "msg.method = \"POST\"\nmsg.headers = {\n    \"Authorization\": `Bearer ${global.get('token.id_token')}`\n}; \n\nif (msg.url === 'https://ors-tsapi.hrs.oraclerestaurants.com/api/v1/organizations/tsc/locations/grcf/revenueCenters') {\n\n    msg.url = `${global.get('cfg.apiBase')}/api/v1/notifications/subscriptions`\n\n    for (const iterator of msg.payload.items) {\n        msg.payload = {\n            \"callbackUri\": \"https://webhook.site/0f3ff542-0dc8-4f14-bc5a-587c49cfc9d1\",\n            \"messageType\": {\n                \"id\": \"CheckNotification\"\n            },\n            \"postOfficeOptions\": {\n                \"PostOfficeType\": \"PushOnePostOffice\"\n            },\n            \"orgShortName\": \"tsc\",\n            \"locRef\": \"grcf\",\n            \"rvcRef\": iterator.rvcRef.toString()\n        }\n        node.send(msg)\n        // return msg;\n    }\n} else { return null}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 1180,
+        "wires": [
+            [
+                "d2d852874d6cfed6"
+            ]
+        ]
+    },
+    {
+        "id": "8844790712b6d97f",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "rc",
+                "v": "{\"code\":0}",
+                "vt": "json"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 1140,
+        "wires": [
+            [
+                "03950261f3836a0e"
+            ]
+        ]
+    },
+    {
+        "id": "4a8ce5873701d44a",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "GRCC - Billy G",
+        "func": "function formEncode(obj) {\n    return Object.entries(obj)\n        .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)\n        .join(\"&\");\n}\nfunction getSinceTimeMinusOneMinute() {\n    return new Date(Date.now() - msg.payload)\n        .toISOString()\n        .slice(0, -8) + \"Z\";\n}\nmsg.topic = \"GRCC - Billy G\"\n\nvar sinceTime = new Date()\nconst qsObj = {\n    // \"checkEmployeeRef\": interger,\n    // \"checkNumbers\": array[integers],\n    // \"includeClosed\": boolean,\n    // \"orderTypeRef\": integer,\n    // \"tableName\": string\n    \"sinceTime\": getSinceTimeMinusOneMinute(),\n    \"includeClosed\": true,\n};\n\nconst qs = formEncode(qsObj);\n\nmsg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/checks?${qs}`\nmsg.rvcRef = 272\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n    \"Simphony-LocRef\": \"grc\",\n    \"Simphony-OrgShortName\": \"tsc\",\n    \"Simphony-RvcRef\": msg.rvcRef\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 740,
+        "wires": [
+            [
+                "fc3af4a81b87152f"
+            ]
+        ]
+    },
+    {
+        "id": "8b0e0bbfc44c4c57",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "60000000",
+        "payloadType": "num",
+        "x": 140,
+        "y": 740,
+        "wires": [
+            [
+                "4a8ce5873701d44a"
+            ]
+        ]
+    },
+    {
+        "id": "fc3af4a81b87152f",
+        "type": "http request",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": true,
+        "headers": [],
+        "x": 530,
+        "y": 740,
+        "wires": [
+            [
+                "94d2462d1d0a9734",
+                "24e46a516b0d46a5",
+                "ba1391c06952410e"
+            ]
+        ]
+    },
+    {
+        "id": "94d2462d1d0a9734",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "GRCC - Billy G",
+        "func": "msg.payload = JSON.parse(msg.payload);\nif (msg.statusCode !== 200) {\n    node.status({ fill: \"red\", shape: \"dot\", text: `error: ${msg.statusCode}` });\n    node.error(`Revenue Centre ${msg.rvcRef} ${msg.payload.title} : ${msg.payload.detail}`, msg);\n    return null\n}\nelse {\n    node.status({ fill: \"green\", shape: \"dot\", text: `success: ${msg.statusCode}` });\n    if (msg.payload.items.length !== 0) {\n        \n        return msg\n        // for (const iterator of msg.payload.items) {\n        //     // node.warn(iterator.header)\n        //     msg.payload = iterator\n        //     node.send(msg)\n        //     // if (iterator.header.status === \"closed\"){\n        //     //     return msg\n        //     // }\n        // }\n        // return null\n    }\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 740,
+        "wires": [
+            [
+                "91f81aef35be92f9",
+                "cf41ba03a43df0b5"
+            ]
+        ]
+    },
+    {
+        "id": "91f81aef35be92f9",
+        "type": "rbe",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 950,
+        "y": 740,
+        "wires": [
+            [
+                "6127d0cc12643e56",
+                "83869691efea5342"
+            ]
+        ]
+    },
+    {
+        "id": "cf41ba03a43df0b5",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "6127d0cc12643e56",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "formatted ",
+        "func": "// Emits 1 message per payload.items[*] using node.send()\n// This works correctly through link out nodes.\n\nfunction isIterable(obj) {\n  return obj != null && typeof obj[Symbol.iterator] === \"function\";\n}\n\nfunction toArrayMaybe(value) {\n  if (value == null) return null;\n  if (Array.isArray(value)) return value;\n  if (isIterable(value)) return Array.from(value);\n  if (typeof value === \"object\" && Number.isInteger(value.length) && value.length >= 0) {\n    try { return Array.from(value); } catch (_) { return null; }\n  }\n  return null;\n}\n\nfunction buildReceiptForItem(item) {\n  const menuItemsArr = toArrayMaybe(item?.menuItems);\n\n  // Rule: menuItems missing/not iterable/empty => skip\n  if (!menuItemsArr || menuItemsArr.length === 0) return null;\n\n  let out = \"\";\n\n\n  // --- GROUP ITEMS ---\n  const grouped = {};\n\n  for (const mi of menuItemsArr) {\n    const id = mi?.menuItemId;\n    const name = mi?.name;\n    const qty = mi?.quantity ?? 0;\n    const unitPrice = mi?.unitPrice;\n\n    if (id == null || name == null || unitPrice == null) continue;\n\n    if (!grouped[id]) {\n      grouped[id] = {\n        name,\n        quantity: 0,\n        unitPrice\n      };\n    }\n\n    grouped[id].quantity += qty;\n  }\n\n  // --- PRINT GROUPED ITEMS ---\n  for (const g of Object.values(grouped)) {\n    out += `${g.quantity} x ${g.name} = R${g.unitPrice}\\n`;\n  }\n\n  const paymentTotal = item?.totals?.paymentTotal;\n  if (paymentTotal != null) out += `Total R${paymentTotal}\\n`;\n\n  const tendersArr = toArrayMaybe(item?.tenders);\n  const t0 = tendersArr && tendersArr.length > 0 ? tendersArr[0] : null;\n  const t1 = tendersArr && tendersArr.length > 1 ? tendersArr[1] : null;\n\n  if (t0?.total != null) out += `Paid R${t0.total}\\n`;\n  if (t1?.total != null) out += `Change R${t1.total}\\n`;\n  if (t0?.name != null) out += `${t0.name}\\n`;\n  if (t0?.referenceText != null) out += `${t0.referenceText.trim()}\\n`;\n\n  return out.length ? out : null;\n}\n\nfunction formatLocalTimePlus2(iso) {\n  if (!iso) return \"\";\n\n  const m = iso.match(\n    /^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})/\n  );\n  if (!m) return iso;\n\n  let [_, y, mo, d, h, mi, s] = m;\n\n  h = Number(h) + 2;\n\n  if (h >= 24) {\n    h -= 24;\n    const dt = new Date(`${y}-${mo}-${d}`);\n    dt.setDate(dt.getDate() + 1);\n    y = dt.getFullYear();\n    mo = String(dt.getMonth() + 1).padStart(2, \"0\");\n    d = String(dt.getDate()).padStart(2, \"0\");\n  }\n\n  return `${y}-${mo}-${d} ${String(h).padStart(2, \"0\")}:${mi}:${s}`;\n}\n\nconst itemsArr = toArrayMaybe(msg?.payload?.items);\nif (!itemsArr || itemsArr.length === 0) return null;\n\n\nfor (const item of itemsArr) {\n  msg.itemInbound = item;\n  const orderChannelRef = item?.header?.orderChannelRef;\n  const checkNumber = item?.header?.checkNumber;\n  const openTime = formatLocalTimePlus2(item?.header?.openTime);\n\n  const receipt = buildReceiptForItem(item);\n  if (receipt == null) continue;\n\n  const m = {\n    ...msg,\n    payload: `${orderChannelRef ?? \"\"}~${checkNumber}\\n${receipt}\\n${openTime}`,\n    orderChannelRef,\n    checkNumber,\n    openTime,\n  };\n\n  node.send(m);\n}\n\n// IMPORTANT: when using node.send in a Function node:\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 740,
+        "wires": [
+            [
+                "e4c2f8aaa25a3426"
+            ]
+        ]
+    },
+    {
+        "id": "83869691efea5342",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "e4c2f8aaa25a3426",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1270,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "9c451c3e9575af19",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "function 6",
+        "func": "// var receipt = msg.payload.split(/~/)[1]\nconst [machine, receipt] = msg.payload.split(\"~\");\n\nconst data = parseReceipt(receipt);\n// node.warn(data);\n\nconst start = buildStartTrans({\n    time: data.time,\n    teller: \"10163\",\n    transaction: data.transaction,\n    machine\n});\n\nconst items = data.items.map(item =>\n    buildItemTrans({ time: data.time, transaction: data.transaction, item })\n);\n\nconst total = buildTotalTrans({\n    time: data.time,\n    transaction: data.transaction,\n    total: data.total\n});\n\nconst tender = buildChangeTrans({\n    time: data.time,\n    transaction: data.transaction,\n    paid: data.paid,\n    change: data.change\n});\n\nconst end = buildCompleteTrans({\n    time: data.time,\n    transaction: data.transaction\n});\n\nconst messages = [];\n\nmessages.push({ payload: start });\n\ndata.items.forEach(item => {\n    messages.push({\n        payload: buildItemTrans({\n            time: data.time,\n            transaction: data.transaction,\n            item\n        })\n    });\n});\n\nmessages.push({ payload: total });\nmessages.push({ payload: tender });\nmessages.push({ payload: end });\n\nreturn [messages];\n// if (start){\n//     node.send({ payload: start})\n// }\n// if (items){\n//     for(const iterator of items){\n//         node.send({ payload: iterator})\n//     }\n// }\n// if (total) {\n//     node.send({ payload: total })\n// }\n// if (tender) {\n//     node.send({ payload: tender })\n// }\n// if (end) {\n//     node.send({ payload: end })\n// }\n\nfunction parseReceipt(text) {\n\n    const lines = text.split(/\\r?\\n/).map(l => l.trim()).filter(Boolean);\n\n    let transaction = null;\n    let total = 0;\n    let paid = 0;\n    let change = 0;\n    let time = null;\n    let items = [];\n\n    // const itemRegex = /^(\\d+)\\s+(.+?)\\s*=?\\s*R?(\\d+(?:\\.\\d+)?)/i;\n    const itemRegex = /^(\\d+)\\s*x\\s*(.+?)\\s*=\\s*R?(\\d+(?:\\.\\d+)?)/i;\n\n    for (let line of lines) {\n\n        if (/Check No/i.test(line)) {\n            const match = line.match(/Check No.\\.?\\s*(\\d+)/i);\n            if (match) transaction = match[1];\n            continue;\n        }\n\n        if (/^total/i.test(line)) {\n            const match = line.match(/R?(\\d+(?:\\.\\d+)?)/);\n            if (match) total = Number(match[1]);\n            continue;\n        }\n\n        if (/^paid/i.test(line)) {\n            const match = line.match(/R?(\\d+(?:\\.\\d+)?)/);\n            if (match) paid = Number(match[1]);\n            continue;\n        }\n\n        if (/^\\d{4}-\\d{2}-\\d{2}/.test(line)) {\n            time = line;\n            continue;\n        }\n\n        const itemMatch = line.match(itemRegex);\n        if (itemMatch) {\nnode.warn(line);\n            const parseItemLine = line.split(\" x \")[0]\n            const parseItemDescription = line.split(\" x \")[1].split(/=/)[0]\n            const parseItemCost = line.split(/=/)[1]\n            items.push({\n                quantity: Number(parseItemLine),\n                description: parseItemDescription.trim(),\n                value: Number(parseItemCost.replace(/[^0-9]/g, \"\").trim())\n            });\n        }\n\n    }\n\n    change = paid - total;\n\n    return {\n        transaction,\n        total,\n        paid,\n        change,\n        time,\n        items\n    };\n}\n\nfunction buildStartTrans({ time, transaction, teller, machine }) {\n\n    return {\n        request: [{\n            counter: \"100\",\n            time,\n            type: \"transaction\",\n            data: [{\n                transaction_id: transaction,\n                time,\n                type: \"start\",\n                data: [{\n                    cashier_id: teller,\n                    till_id: machine\n                }]\n            }]\n        }]\n    };\n\n}\n\nfunction buildItemTrans({ time, transaction, item }) {\n\n    return {\n        request: [{\n            counter: \"1\",\n            time,\n            type: \"transaction\",\n            data: [{\n                transaction_id: transaction,\n                time,\n                type: \"item\",\n                data: [{\n                    code: \"\",\n                    description: item.description,\n                    quantity: item.quantity,\n                    item_value: item.value,\n                    total_value: item.quantity * item.value\n                }]\n            }]\n        }]\n    };\n\n}\n\nfunction buildTotalTrans({ time, transaction, total }) {\n\n    return {\n        request: [{\n            counter: \"1\",\n            time,\n            type: \"transaction\",\n            data: [{\n                transaction_id: transaction,\n                time,\n                type: \"total\",\n                data: [{\n                    value: total\n                }]\n            }]\n        }]\n    };\n\n}\n\nfunction buildChangeTrans({ time, transaction, paid, change, type = \"cash\" }) {\n\n    return {\n        request: [{\n            counter: \"1\",\n            time,\n            type: \"transaction\",\n            data: [{\n                transaction_id: transaction,\n                time,\n                type: \"tender\",\n                data: [{\n                    type,\n                    value: paid,\n                    change\n                }]\n            }]\n        }]\n    };\n\n}\n\nfunction buildCompleteTrans({ time, transaction }) {\n\n    return {\n        request: [{\n            counter: \"1\",\n            time,\n            type: \"transaction\",\n            data: [{\n                transaction_id: transaction,\n                time,\n                type: \"end\",\n                data: [{\n                    type: \"complete\"\n                }]\n            }]\n        }]\n    };\n\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 360,
+        "wires": [
+            [
+                "a509556b107df78a"
+            ]
+        ]
+    },
+    {
+        "id": "a509556b107df78a",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "06293d8589b23fe5",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "24e46a516b0d46a5",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "ada52d9fc47166cf",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "function 7",
+        "func": "msg.payload = JSON.parse(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 580,
+        "wires": [
+            [
+                "0f02a4f9d66e3f51"
+            ]
+        ]
+    },
+    {
+        "id": "0f02a4f9d66e3f51",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "ba1391c06952410e",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "function 8",
+        "func": "msg.payload = JSON.parse(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 780,
+        "wires": [
+            [
+                "9eb8f8e310e31c3e",
+                "a08e63a22df72dc6"
+            ]
+        ]
+    },
+    {
+        "id": "9eb8f8e310e31c3e",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "a08e63a22df72dc6",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "function 9",
+        "func": "for (const iterator of msg.payload.items){\n    if (iterator.header.checkNumber === 27108211){\n        msg.payload = iterator\n        return msg\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 840,
+        "wires": [
+            [
+                "f6d5162fcd988f25"
+            ]
+        ]
+    },
+    {
+        "id": "f6d5162fcd988f25",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "1de7f8933480c1f4",
+        "type": "inject",
+        "z": "50360d7c0e3fe542",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 540,
+        "y": 60,
+        "wires": [
+            [
+                "911edfe4a1d829b7"
+            ]
+        ]
+    },
+    {
+        "id": "911edfe4a1d829b7",
+        "type": "function",
+        "z": "50360d7c0e3fe542",
+        "name": "function 10",
+        "func": "msg.payload = {\n    \"curUTC\": \"2020-10-20T16:42:42\",\n    \"locRef\": \"SAC\",\n    \"guestChecks\": [{\n        \"guestCheckId\": 829084,\n        \"chkNum\": 9735,\n        \"chkName\": \"Check\",\n        \"opnBusDt\": \"2020-10-20\",\n        \"opnUTC\": \"2020-10-20T15:41:54\",\n        \"opnLcl\": \"2020-10-20T11:41:54\",\n        \"clsdBusDt\": \"2020-10-20\",\n        \"clsdUTC\": \"2020-10-20T16:20:44\",\n        \"clsdLcl\": \"2020-10-20T12:20:44\",\n        \"reopnClsdChkClsdBusDt\": \"2020-10-20\",\n        \"reopnClsdChkClsdUTC\": \"2020-10-20T16:20:44\",\n        \"reopnClsdChkClsdLcl\": \"2020-10-20T12:20:44\",\n        \"lastUpdatedUTC\": \"2020-10-20T16:20:45\",\n        \"lastUpdatedLcl\": \"2020-10-20T12:20:45\",\n        \"lastTransUTC\": \"2020-10-20T12:20:45\",\n        \"lastTransLcl\": \"2020-10-20T12:20:45\",\n        \"clsdFlag\": true,\n        \"cancelFlag\": false,\n        \"gstCnt\": 2,\n        \"subTtl\": 16.66,\n        \"autoSvcTtl\": 0.00,\n        \"svcChgTtl\": 3.5,\n        \"nonTxblSlsTtl\": 123.45,\n        \"taxExmpSlsTtl\": 0.00,\n        \"taxCollTtl\": 0.83,\n        \"chkTtl\": 20.99,\n        \"dscTtl\": -5,\n        \"payTtl\": 15.00,\n        \"tipTotal\": 3.5,\n        \"balDueTtl\": 0.99,\n        \"rndTtl\": 21.00,\n        \"reopnFrmChk\": 9736,\n        \"reopnToChk\": 9738,\n        \"spltFrmChk\": 9735,\n        \"rvcNum\": 1,\n        \"ocNum\": 2,\n        \"otNum\": 12,\n        \"tblNum\": 1,\n        \"tblName\": \"5\",\n        \"empNum\": 258,\n        \"chkInfo\": \"Check Info\",\n        \"chkRef\": \"Check Reference\",\n        \"xferStatus\": \"X\",\n        \"xferToChkNum\": 8,\n        \"autoFireUTC\": \"2020-10-20T12:20:45\",\n        \"autoFireLcl\": \"2020-10-20T12:20:45\",\n        \"numSrvcRd\": 2,\n        \"vdTtl\": 12.34,\n        \"mgrVdTtl\": 12.34,\n        \"returnTtl\": 12.34,\n        \"errorCorrectTtl\": 12.34,\n        \"reopnClsdChkFlag\": false,\n        \"reopnClsdChkOpnLcl\": \"2020-10-20T12:19:44\",\n        \"reopnClsdChkOpnUTC\": \"2020-10-20T12:19:44\",\n        \"reopnClsdChkOpnBusDt\": \"2020-10-20\",\n        \"numChkPrntd\": 1,\n        \"splitOut\": 1,\n        \"addedIn\": 1,\n        \"inclTaxExmpTtl\": 1.82,\n        \"autoClsdFlag\": true,\n        \"taxes\": [{\n            \"taxNum\": 1,\n            \"txblSlsTtl\": 12.34,\n            \"taxCollTtl\": 0.83,\n            \"taxRate\": 19,\n            \"taxType\": 3,\n            \"taxExmptTtl\": 12.34\n        }],\n        \"detailLines\": [{\n            \"guestCheckLineItemId\": 9433187,\n            \"lineNum\": 1,\n            \"dtlId\": 17,\n            \"parDtlId\": 0,\n            \"detailUTC\": \"2020-10-20T15:42:08\",\n            \"detailLcl\": \"2020-10-20T11:42:08\",\n            \"busDt\": \"2020-10-20\",\n            \"lastUpdatedUTC\": \"2020-10-20T12:20:45\",\n            \"lastUpdatedLcl\": \"2020-10-20T12:20:45\",\n            \"rvcNum\": 152,\n            \"prepCost\": 0.481,\n            \"weight\": 1.23,\n            \"vdFlag\": false,\n            \"errCorFlag\": false,\n            \"wsNum\": 6,\n            \"refInfo1\": \"reference info 1\",\n            \"refInfo2\": \"reference info 2\",\n            \"dspTtl\": 2.09,\n            \"dspQty\": 1,\n            \"aggTtl\": 2.09,\n            \"aggQty\": 1,\n            \"doNotShowFlag\": false,\n            \"chkEmpNum\": 69405,\n            \"transEmpNum\": 69405,\n            \"mgrEmpNum\": null,\n            \"rsnCodeNum\": null,\n            \"svcRndNum\": 1,\n            \"cashierNum\": null,\n            \"dtlOcNum\": 2,\n            \"dtlOtNum\": 123,\n            \"seatNum\": 1,\n            \"numerator\": 1,\n            \"denominator\": 3,\n            \"menuItem\": {\n                \"miNum\": 3401,\n                \"comboMealSeq\": 1,\n                \"comboSideSeq\": 1,\n                \"comboGrpNum\": 101,\n                \"modFlag\": false,\n                \"modPrfx\": 1,\n                \"inclTax\": 0,\n                \"returnFlag\": false,\n                \"activeTaxes\": 1,\n                \"prcLvl\": 1\n            }\n        },\n        {\n            \"guestCheckLineItemId\": 9433353,\n            \"lineNum\": 21,\n            \"dtlId\": 37,\n            \"parDtlId\": 20,\n            \"detailUTC\": \"2020-10-20T16:06:06\",\n            \"detailLcl\": \"2020-10-20T12:06:06\",\n            \"busDt\": \"2020-10-20\",\n            \"rvcNum\": 152,\n            \"prepCost\": 0,\n            \"vdFlag\": false,\n            \"errCorFlag\": false,\n            \"wsNum\": 5,\n            \"refInfo1\": \"SV012003621910405\",\n            \"refInfo2\": null,\n            \"dspTtl\": -2.19,\n            \"dspQty\": 1,\n            \"aggTtl\": -2.19,\n            \"aggQty\": 0,\n            \"doNotShowFlag\": true,\n            \"chkEmpNum\": 69405,\n            \"chkEmpId\": 123435,\n            \"transEmpId\": 123435,\n            \"mgrEmpId\": 123435,\n            \"transEmpNum\": 69405,\n            \"mgrEmpNum\": null,\n            \"rsnCodeNum\": null,\n            \"svcRndNum\": 4,\n            \"cashierNum\": null,\n            \"dtlOtNum\": 123,\n            \"seatNum\": 1,\n            \"numerator\": 1,\n            \"denominator\": 3,\n            \"discount\": {\n                \"dscNum\": 210,\n                \"dscMiNum\": 1509,\n                \"mealEmpNum\": null,\n                \"vatTaxTtl\": 0,\n                \"inclTax\": 123.456789,\n                \"activeTaxes\": \"1,2,5\"\n            }\n        },\n        {\n            \"guestCheckLineItemId\": 9433400,\n            \"lineNum\": 3,\n            \"dtlId\": 0,\n            \"parDtlId\": 0,\n            \"detailUTC\": \"2020-10-20T16:20:45\",\n            \"detailLcl\": \"2020-10-20T12:20:45\",\n            \"busDt\": \"2020-10-20\",\n            \"rvcNum\": 152,\n            \"prepCost\": 0,\n            \"vdFlag\": false,\n            \"errCorFlag\": false,\n            \"wsNum\": 5,\n            \"refInfo1\": null,\n            \"refInfo2\": null,\n            \"dspTtl\": 3.5,\n            \"dspQty\": 1,\n            \"aggTtl\": 3.5,\n            \"aggQty\": 1,\n            \"doNotShowFlag\": false,\n            \"chkEmpNum\": 69405,\n            \"transEmpNum\": 69405,\n            \"mgrEmpNum\": null,\n            \"rsnCodeNum\": null,\n            \"svcRndNum\": 6,\n            \"cashierNum\": null,\n            \"dtlOtNum\": 123,\n            \"seatNum\": 1,\n            \"numerator\": 1,\n            \"denominator\": 3,\n            \"serviceCharge\": {\n                \"svcChgNum\": 101,\n                \"inclTax\": 123.456789,\n                \"activeTaxes\": \"1,2,5\"\n            }\n        },\n        {\n            \"guestCheckLineItemId\": 9433401,\n            \"lineNum\": 4,\n            \"dtlId\": 0,\n            \"parDtlId\": 0,\n            \"detailUTC\": \"2020-10-20T16:20:45\",\n            \"detailLcl\": \"2020-10-20T12:20:45\",\n            \"busDt\": \"2020-10-20\",\n            \"rvcNum\": 152,\n            \"prepCost\": 0,\n            \"vdFlag\": false,\n            \"errCorFlag\": false,\n            \"wsNum\": 5,\n            \"refInfo1\": \"XXXXXXXXXXX6008\",\n            \"refInfo2\": null,\n            \"dspTtl\": 3.5,\n            \"dspQty\": 1,\n            \"aggTtl\": 3.5,\n            \"aggQty\": 1,\n            \"doNotShowFlag\": true,\n            \"chkEmpNum\": 69405,\n            \"transEmpNum\": 69405,\n            \"mgrEmpNum\": null,\n            \"rsnCodeNum\": null,\n            \"svcRndNum\": 6,\n            \"cashierNum\": null,\n            \"dtlOtNum\": 123,\n            \"seatNum\": 1,\n            \"numerator\": 1,\n            \"denominator\": 3,\n            \"tenderMedia\": {\n                \"tmedNum\": 503,\n                \"mealEmpNum\": 258\n            }\n        },\n        {\n            \"guestCheckLineItemId\": 9433402,\n            \"lineNum\": 39,\n            \"dtlId\": 55,\n            \"parDtlId\": 0,\n            \"detailUTC\": \"2011-01-17T16:20:45\",\n            \"detailLcl\": \"2011-01-17T12:20:45\",\n            \"busDt\": \"2011-01-17\",\n            \"rvcNum\": 152,\n            \"prepCost\": 0,\n            \"vdFlag\": false,\n            \"errCorFlag\": false,\n            \"wsNum\": 5,\n            \"refInfo1\": \"XXXXXXXXXXX6008\",\n            \"refInfo2\": null,\n            \"dspTtl\": 0,\n            \"dspQty\": 0,\n            \"aggTtl\": 20.99,\n            \"aggQty\": 0,\n            \"doNotShowFlag\": false,\n            \"chkEmpNum\": 69405,\n            \"transEmpNum\": 69405,\n            \"mgrEmpNum\": null,\n            \"rsnCodeNum\": null,\n            \"svcRndNum\": 6,\n            \"cashierNum\": null,\n            \"dtlOtNum\": 123,\n            \"seatNum\": 1,\n            \"numerator\": 1,\n            \"denominator\": 3,\n            \"other\": {\n                \"detailType\": 6,\n                \"detailNum\": 53415\n            }\n        },\n        {\n            \"guestCheckLineItemId\": 9433409,\n            \"lineNum\": 40,\n            \"dtlId\": 56,\n            \"parDtlId\": 0,\n            \"detailUTC\": \"2011-01-17T16:20:45\",\n            \"detailLcl\": \"2011-01-17T12:20:45\",\n            \"busDt\": \"2011-01-17\",\n            \"rvcNum\": 152,\n            \"prepCost\": 0,\n            \"vdFlag\": false,\n            \"errCorFlag\": false,\n            \"wsNum\": 5,\n            \"refInfo1\": \"XXXXXXXXXXX6008\",\n            \"refInfo2\": null,\n            \"dspTtl\": 0,\n            \"dspQty\": 0,\n            \"aggTtl\": 20.99,\n            \"aggQty\": 0,\n            \"doNotShowFlag\": false,\n            \"chkEmpNum\": 69405,\n            \"transEmpNum\": 69405,\n            \"mgrEmpNum\": null,\n            \"rsnCodeNum\": null,\n            \"svcRndNum\": 6,\n            \"cashierNum\": null,\n            \"dtlOtNum\": 123,\n            \"seatNum\": 1,\n            \"numerator\": 1,\n            \"denominator\": 3,\n            \"errorCorrect\": {\n                \"type\": 1,\n                \"objectNum\": 123\n            }\n        }]\n    }]\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 60,
+        "wires": [
+            [
+                "74c7441a3cf2e8ae"
+            ]
+        ]
+    },
+    {
+        "id": "74c7441a3cf2e8ae",
+        "type": "debug",
+        "z": "50360d7c0e3fe542",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "5f0a4d2cf57c0acd",
+        "type": "http request",
+        "z": "d761d0b7b35433f8",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 510,
+        "y": 200,
+        "wires": [
+            [
+                "e5be69a742901fa8",
+                "7429d17c1e36d37d"
+            ]
+        ]
+    },
+    {
+        "id": "bd5d7c5c27b0d766",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "get rcvRef grcr",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/tsc/locations/grcr/revenueCenters`\nmsg.rvcRef = 151\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 300,
+        "wires": [
+            [
+                "5f0a4d2cf57c0acd"
+            ]
+        ]
+    },
+    {
+        "id": "7800a7ae8cc35adc",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "get Locations",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/${global.get('cfg.orgShortName')}/locations`\nmsg.rvcRef = 151\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "5f0a4d2cf57c0acd"
+            ]
+        ]
+    },
+    {
+        "id": "07f2686eb947b5e8",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "get rcvRef",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/tsc/locations/grcf/revenueCenters`\nmsg.rvcRef = 151\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "5f0a4d2cf57c0acd"
+            ]
+        ]
+    },
+    {
+        "id": "5dba3448a13f8b5c",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "get rcvRef grct",
+        "func": "msg.method = \"GET\"\nmsg.url = `${global.get('cfg.apiBase')}/api/v1/organizations/tsc/locations/grct/revenueCenters`\nmsg.rvcRef = 151\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 260,
+        "wires": [
+            [
+                "5f0a4d2cf57c0acd"
+            ]
+        ]
+    },
+    {
+        "id": "a291688d44b38c6b",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "get Locations",
+        "func": "msg.method = \"POST\"\nmsg.url = `${global.get('cfg.apiBase')}/bi/v1/tsc/getGuestChecks`\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\n\nmsg.payload = {\n    \"locRef\": \"grc\",\n    \"rvcNum\": 271,\n    \"clsdBusDt\":\"2026-03-12\",\n    \"changedSinceUTC\": \"2026-03-12T14:00:00\",\n    \"searchCriteria\": \"where equals(guestChecks.chkNum, 27108242)\"\n}\nreturn msg\n//For example, searchCriteria: \"equals(active,1)\"\n    // chkRef, b6401913c43b49b691687956cdef0fc000001703\n\nfunction getSinceTimeMinusOneMinute() {\n    return new Date(Date.now() - msg.payload)\n        .toISOString()\n        .slice(0, -8) + \"Z\";\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 120,
+        "wires": [
+            [
+                "5f0a4d2cf57c0acd",
+                "e50fb04d48552c08"
+            ]
+        ]
+    },
+    {
+        "id": "e5be69a742901fa8",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "function 11",
+        "func": "msg.payload = {\"items\": [JSON.parse(msg.payload)]};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 240,
+        "wires": [
+            [
+                "08c999c0c389d8a9",
+                "e62e10b293128e4b"
+            ]
+        ]
+    },
+    {
+        "id": "ed5b7cf31b4f5310",
+        "type": "inject",
+        "z": "d761d0b7b35433f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "bd5d7c5c27b0d766"
+            ]
+        ]
+    },
+    {
+        "id": "183a13aef05d0958",
+        "type": "inject",
+        "z": "d761d0b7b35433f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "7800a7ae8cc35adc"
+            ]
+        ]
+    },
+    {
+        "id": "582209c012272a8a",
+        "type": "inject",
+        "z": "d761d0b7b35433f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 220,
+        "wires": [
+            [
+                "07f2686eb947b5e8"
+            ]
+        ]
+    },
+    {
+        "id": "cac20498652d1d04",
+        "type": "inject",
+        "z": "d761d0b7b35433f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 260,
+        "wires": [
+            [
+                "5dba3448a13f8b5c"
+            ]
+        ]
+    },
+    {
+        "id": "3299271f10d1db7f",
+        "type": "inject",
+        "z": "d761d0b7b35433f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 120,
+        "wires": [
+            [
+                "a291688d44b38c6b"
+            ]
+        ]
+    },
+    {
+        "id": "e50fb04d48552c08",
+        "type": "debug",
+        "z": "d761d0b7b35433f8",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "08c999c0c389d8a9",
+        "type": "debug",
+        "z": "d761d0b7b35433f8",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "e62e10b293128e4b",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "function 12",
+        "func": "// Emits 1 message per payload.items[*] using node.send()\n// This works correctly through link out nodes.\n\nfunction isIterable(obj) {\n    return obj != null && typeof obj[Symbol.iterator] === \"function\";\n}\n\nfunction toArrayMaybe(value) {\n    if (value == null) return null;\n    if (Array.isArray(value)) return value;\n    if (isIterable(value)) return Array.from(value);\n    if (typeof value === \"object\" && Number.isInteger(value.length) && value.length >= 0) {\n        try { return Array.from(value); } catch (_) { return null; }\n    }\n    return null;\n}\n\nfunction buildReceiptForItem(item) {\n    const menuItemsArr = toArrayMaybe(item?.menuItems);\n\n    // Rule: menuItems missing/not iterable/empty => skip\n    if (!menuItemsArr || menuItemsArr.length === 0) return null;\n\n    let out = \"\";\n\n\n    // --- GROUP ITEMS ---\n    const grouped = {};\n\n    for (const mi of menuItemsArr) {\n        const id = mi?.menuItemId;\n        const name = mi?.name;\n        const qty = mi?.quantity ?? 0;\n        const unitPrice = mi?.unitPrice;\n\n        if (id == null || name == null || unitPrice == null) continue;\n\n        if (!grouped[id]) {\n            grouped[id] = {\n                name,\n                quantity: 0,\n                unitPrice\n            };\n        }\n\n        grouped[id].quantity += qty;\n    }\n\n    // --- PRINT GROUPED ITEMS ---\n    for (const g of Object.values(grouped)) {\n        out += `${g.quantity} x ${g.name} = R${g.unitPrice}\\n`;\n    }\n\n    const paymentTotal = item?.totals?.paymentTotal;\n    if (paymentTotal != null) out += `Total R${paymentTotal}\\n`;\n\n    const tendersArr = toArrayMaybe(item?.tenders);\n    const t0 = tendersArr && tendersArr.length > 0 ? tendersArr[0] : null;\n    const t1 = tendersArr && tendersArr.length > 1 ? tendersArr[1] : null;\n\n    if (t0?.total != null) out += `Paid R${t0.total}\\n`;\n    if (t1?.total != null) out += `Change R${t1.total}\\n`;\n    if (t0?.name != null) out += `${t0.name}\\n`;\n    if (t0?.referenceText != null) out += `${t0.referenceText.trim()}\\n`;\n\n    return out.length ? out : null;\n}\n\nfunction formatLocalTimePlus2(iso) {\n    if (!iso) return \"\";\n\n    const m = iso.match(\n        /^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})/\n    );\n    if (!m) return iso;\n\n    let [_, y, mo, d, h, mi, s] = m;\n\n    h = Number(h) + 2;\n\n    if (h >= 24) {\n        h -= 24;\n        const dt = new Date(`${y}-${mo}-${d}`);\n        dt.setDate(dt.getDate() + 1);\n        y = dt.getFullYear();\n        mo = String(dt.getMonth() + 1).padStart(2, \"0\");\n        d = String(dt.getDate()).padStart(2, \"0\");\n    }\n\n    return `${y}-${mo}-${d} ${String(h).padStart(2, \"0\")}:${mi}:${s}`;\n}\n\nconst itemsArr = toArrayMaybe(msg?.payload?.items);\nif (!itemsArr || itemsArr.length === 0) return null;\n\n\nfor (const item of itemsArr) {\n    msg.itemInbound = item;\n    const orderChannelRef = item?.header?.orderChannelRef;\n    const checkNumber = item?.header?.checkNumber;\n    const openTime = formatLocalTimePlus2(item?.header?.openTime);\n\n    const receipt = buildReceiptForItem(item);\n    if (receipt == null) continue;\n\n    const m = {\n        ...msg,\n        payload: `${orderChannelRef ?? \"\"}~Check no. ${checkNumber}\\n${receipt}\\n${openTime}`,\n        orderChannelRef,\n        checkNumber,\n        openTime,\n    };\n\n    node.send(m);\n}\n\n// IMPORTANT: when using node.send in a Function node:\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 280,
+        "wires": [
+            [
+                "11f5a4a7934dc4f7",
+                "3cd2438da3203d6f"
+            ]
+        ]
+    },
+    {
+        "id": "11f5a4a7934dc4f7",
+        "type": "debug",
+        "z": "d761d0b7b35433f8",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "3cd2438da3203d6f",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "function 13",
+        "func": "// var receipt = msg.payload.split(/~/)[1]\nconst [machine, receipt] = msg.payload.split(\"~\");\n\nconst data = parseReceipt(receipt);\n// node.warn(data);\n\nconst start = buildStartTrans({\n    time: data.time,\n    teller: \"10163\",\n    transaction: data.transaction,\n    machine\n});\n\nconst items = data.items.map(item =>\n    buildItemTrans({ time: data.time, transaction: data.transaction, item })\n);\n\nconst total = buildTotalTrans({\n    time: data.time,\n    transaction: data.transaction,\n    total: data.total\n});\n\nconst tender = buildChangeTrans({\n    time: data.time,\n    transaction: data.transaction,\n    paid: data.paid,\n    change: data.change\n});\n\nconst end = buildCompleteTrans({\n    time: data.time,\n    transaction: data.transaction\n});\n\nconst messages = [];\n\nmessages.push({ payload: start });\n\ndata.items.forEach(item => {\n    messages.push({\n        payload: buildItemTrans({\n            time: data.time,\n            transaction: data.transaction,\n            item\n        })\n    });\n});\n\nmessages.push({ payload: total });\nmessages.push({ payload: tender });\nmessages.push({ payload: end });\n\nreturn [messages];\n// if (start){\n//     node.send({ payload: start})\n// }\n// if (items){\n//     for(const iterator of items){\n//         node.send({ payload: iterator})\n//     }\n// }\n// if (total) {\n//     node.send({ payload: total })\n// }\n// if (tender) {\n//     node.send({ payload: tender })\n// }\n// if (end) {\n//     node.send({ payload: end })\n// }\n\nfunction parseReceipt(text) {\n\n    const lines = text.split(/\\r?\\n/).map(l => l.trim()).filter(Boolean);\n\n    let transaction = null;\n    let total = 0;\n    let paid = 0;\n    let change = 0;\n    let time = null;\n    let items = [];\n\n    // const itemRegex = /^(\\d+)\\s+(.+?)\\s*=?\\s*R?(\\d+(?:\\.\\d+)?)/i;\n    const itemRegex = /^(\\d+)\\s*x\\s*(.+?)\\s*=\\s*R?(\\d+(?:\\.\\d+)?)/i;\n\n    for (let line of lines) {\n\n        if (/Check No/i.test(line)) {\n            const match = line.match(/Check No.\\.?\\s*(\\d+)/i);\n            if (match) transaction = match[1];\n            continue;\n        }\n\n        if (/^total/i.test(line)) {\n            const match = line.match(/R?(\\d+(?:\\.\\d+)?)/);\n            if (match) total = Number(match[1]);\n            continue;\n        }\n\n        if (/^paid/i.test(line)) {\n            const match = line.match(/R?(\\d+(?:\\.\\d+)?)/);\n            if (match) paid = Number(match[1]);\n            continue;\n        }\n\n        if (/^\\d{4}-\\d{2}-\\d{2}/.test(line)) {\n            time = line;\n            continue;\n        }\n\n        const itemMatch = line.match(itemRegex);\n        if (itemMatch) {\nnode.warn(line);\n            const parseItemLine = line.split(\" x \")[0]\n            const parseItemDescription = line.split(\" x \")[1].split(/=/)[0]\n            const parseItemCost = line.split(/=/)[1]\n            items.push({\n                quantity: Number(parseItemLine),\n                description: parseItemDescription.trim(),\n                value: Number(parseItemCost.replace(/[^0-9]/g, \"\").trim())\n            });\n        }\n\n    }\n\n    change = paid - total;\n\n    return {\n        transaction,\n        total,\n        paid,\n        change,\n        time,\n        items\n    };\n}\n\nfunction buildStartTrans({ time, transaction, teller, machine }) {\n\n    return {\n        request: [{\n            counter: \"100\",\n            time,\n            type: \"transaction\",\n            data: [{\n                transaction_id: transaction,\n                time,\n                type: \"start\",\n                data: [{\n                    cashier_id: teller,\n                    till_id: machine\n                }]\n            }]\n        }]\n    };\n\n}\n\nfunction buildItemTrans({ time, transaction, item }) {\n\n    return {\n        request: [{\n            counter: \"1\",\n            time,\n            type: \"transaction\",\n            data: [{\n                transaction_id: transaction,\n                time,\n                type: \"item\",\n                data: [{\n                    code: \"\",\n                    description: item.description,\n                    quantity: item.quantity,\n                    item_value: item.value,\n                    total_value: item.quantity * item.value\n                }]\n            }]\n        }]\n    };\n\n}\n\nfunction buildTotalTrans({ time, transaction, total }) {\n\n    return {\n        request: [{\n            counter: \"1\",\n            time,\n            type: \"transaction\",\n            data: [{\n                transaction_id: transaction,\n                time,\n                type: \"total\",\n                data: [{\n                    value: total\n                }]\n            }]\n        }]\n    };\n\n}\n\nfunction buildChangeTrans({ time, transaction, paid, change, type = \"cash\" }) {\n\n    return {\n        request: [{\n            counter: \"1\",\n            time,\n            type: \"transaction\",\n            data: [{\n                transaction_id: transaction,\n                time,\n                type: \"tender\",\n                data: [{\n                    type,\n                    value: paid,\n                    change\n                }]\n            }]\n        }]\n    };\n\n}\n\nfunction buildCompleteTrans({ time, transaction }) {\n\n    return {\n        request: [{\n            counter: \"1\",\n            time,\n            type: \"transaction\",\n            data: [{\n                transaction_id: transaction,\n                time,\n                type: \"end\",\n                data: [{\n                    type: \"complete\"\n                }]\n            }]\n        }]\n    };\n\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 320,
+        "wires": [
+            [
+                "4dd60f0c6c288946"
+            ]
+        ]
+    },
+    {
+        "id": "4dd60f0c6c288946",
+        "type": "debug",
+        "z": "d761d0b7b35433f8",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b6216a7a5719f7ab",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "function 14",
+        "func": "global.set(\"cfg\", { \"authHost\": \"https://ors-idm.hrs.oraclerestaurants.com\", \"apiBase\": \"https://simphony-home.hrs.oraclerestaurants.com\", \"clientId\": \"\", \"orgShortName\": \"TSC\", \"locRef\": \"GRC\", \"username\": \"\", \"password\": \"$\" })\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 40,
+        "wires": [
+            [
+                "470680fb4418cd5b"
+            ]
+        ]
+    },
+    {
+        "id": "7189ab7da5eeda3d",
+        "type": "inject",
+        "z": "d761d0b7b35433f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 350,
+        "y": 40,
+        "wires": [
+            [
+                "b6216a7a5719f7ab"
+            ]
+        ]
+    },
+    {
+        "id": "470680fb4418cd5b",
+        "type": "debug",
+        "z": "d761d0b7b35433f8",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7429d17c1e36d37d",
+        "type": "debug",
+        "z": "d761d0b7b35433f8",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "425a667f7189924a",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "get Locations",
+        "func": "msg.method = \"POST\"\nmsg.url = `${global.get('cfg.apiBase')}/bi/v1/tsc/getGuestChecks`\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\n\nmsg.payload = {\n    \"locRef\": \"grc\",\n    \"rvcNum\": 271,\n    \"clsdBusDt\": \"2026-03-12\",\n    \"changedSinceUTC\": getSinceTimeMinusOneMinute(),\n    // \"searchCriteria\": \"where equals(guestChecks.chkNum, 27108242)\"\n}\nreturn msg\n//For example, searchCriteria: \"equals(active,1)\"\n// chkRef, b6401913c43b49b691687956cdef0fc000001703\n\nfunction getSinceTimeMinusOneMinute() {\n    return new Date(Date.now() - 6000)\n        .toISOString()\n        .slice(0, -8);\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 440,
+        "wires": [
+            [
+                "c8e944dbfcedafa0",
+                "5f0a4d2cf57c0acd"
+            ]
+        ]
+    },
+    {
+        "id": "610b08189957dd0f",
+        "type": "inject",
+        "z": "d761d0b7b35433f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 440,
+        "wires": [
+            [
+                "425a667f7189924a"
+            ]
+        ]
+    },
+    {
+        "id": "c8e944dbfcedafa0",
+        "type": "debug",
+        "z": "d761d0b7b35433f8",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "92aa0ddfd9b00da8",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "get Locations",
+        "func": "msg.method = \"POST\"\nmsg.url = `${global.get('cfg.apiBase')}/bi/v1/tsc/getMenuItemDimensions`\nmsg.headers = {\n    \"Authorization\": \"Bearer \" + global.get('token.id_token'),\n    \"Content-Type\": \"application/json\",\n};\n\nmsg.payload = {\n    \"locRef\": \"grc\",\n    // \"rvcNum\": 271,\n    // \"clsdBusDt\": \"2026-03-12\",\n    // \"changedSinceUTC\": getSinceTimeMinusOneMinute(),\n    \"searchCriteria\": \"where equals(menuItems.num, 903221106)\"\n}\nreturn msg\n//For example, searchCriteria: \"equals(active,1)\"\n// chkRef, b6401913c43b49b691687956cdef0fc000001703\n\nfunction getSinceTimeMinusOneMinute() {\n    return new Date(Date.now() - 6000)\n        .toISOString()\n        .slice(0, -8);\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 500,
+        "wires": [
+            [
+                "cd1ec703244b9bc5",
+                "5f0a4d2cf57c0acd"
+            ]
+        ]
+    },
+    {
+        "id": "13c7f642be1e6767",
+        "type": "inject",
+        "z": "d761d0b7b35433f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 500,
+        "wires": [
+            [
+                "92aa0ddfd9b00da8"
+            ]
+        ]
+    },
+    {
+        "id": "cd1ec703244b9bc5",
+        "type": "debug",
+        "z": "d761d0b7b35433f8",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "3bdd1cb78b6047e5",
+        "type": "function",
+        "z": "d761d0b7b35433f8",
+        "name": "function 15",
+        "func": "`903221106`\n// return msg;\n\nfor (const iterator of msg.payload.items) {\n    if (iterator.header.checkNumber === 27108211) {\n        msg.payload = iterator\n        return msg\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ededf215488e2134",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-serialport": "2.0.3",
+            "node-red-contrib-switch-break": "1.0.2"
+        }
+    }
+]
