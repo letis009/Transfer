@@ -1,0 +1,5 @@
+{
+  "backend": { "type": "file", "file": { "dir": "./run/out" } },
+  "spool":   { "dir": "./run/spool" },
+  "log":     { "level": "debug" }
+}

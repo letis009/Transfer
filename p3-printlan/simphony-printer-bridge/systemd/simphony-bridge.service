@@ -1,0 +1,25 @@
+[Unit]
+Description=Simphony virtual slip printer bridge
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=bridge
+Group=lp
+ExecStart=/usr/bin/node /opt/simphony-bridge/src/index.js
+Environment=NODE_ENV=production
+Environment=BRIDGE_CONFIG=/etc/simphony-bridge/config.json
+WorkingDirectory=/opt/simphony-bridge
+StateDirectory=simphony-bridge
+Restart=always
+RestartSec=2
+# Needed only if you bind :9100 as a non-root user on a locked-down kernel
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,30 @@
+{
+  "listen": {
+    "host": "0.0.0.0",
+    "port": 9100,
+    "singleSession": true,
+    "idleTimeoutMs": 0,
+    "jobIdleMs": 400,
+    "flushOnClose": true,
+    "maxJobBytes": 4194304
+  },
+  "identity": {
+    "modelId": 32,
+    "typeId": 2,
+    "firmwareId": 3
+  },
+  "backend": {
+    "type": "tcp",
+    "tcp":    { "host": "192.168.1.50", "port": 9100, "pollMs": 3000, "replyTimeoutMs": 800 },
+    "usblp":  { "device": "/dev/usb/lp0", "readStatus": true },
+    "serial": { "device": "/dev/ttyACM0", "baudRate": 115200 },
+    "file":   { "dir": "/var/lib/simphony-bridge/out" }
+  },
+  "spool": {
+    "dir": "/var/lib/simphony-bridge/spool",
+    "retryBaseMs": 1000,
+    "retryMaxMs": 30000,
+    "maxJobs": 200
+  },
+  "log": { "level": "info", "rawCapture": false, "rawCaptureDir": "/var/lib/simphony-bridge/raw" }
+}

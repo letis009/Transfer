@@ -1,0 +1,17 @@
+{
+  "name": "simphony-printer-bridge",
+  "version": "0.1.0",
+  "description": "Virtual Epson TM-T88 Ethernet printer for Oracle Simphony, relaying to a real network/USB printer",
+  "main": "src/index.js",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node src/index.js",
+    "dump": "node tools/escpos-dump.js",
+    "fakepos": "node tools/fake-pos.js",
+    "test": "node --test"
+  },
+  "optionalDependencies": {
+    "serialport": "^12.0.0"
+  },
+  "license": "UNLICENSED"
+}
