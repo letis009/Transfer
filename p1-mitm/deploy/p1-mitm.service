@@ -1,0 +1,31 @@
+[Unit]
+Description=P1-MITM — USB printer man-in-the-middle (ESC/POS intercept)
+Documentation=https://github.com/letis009/TDN-USB
+# Must start after network (overlay file may be on network share in future)
+# and after systemd-udevd settles (so /dev/usb/lp0 exists)
+After=local-fs.target systemd-udevd.service
+# P2 overlay should be running so the file write has a watcher
+Wants=pos-overlay-p2.service
+
+[Service]
+Type=simple
+# No config file required: p1-mitm auto-clones the attached printer's identity.
+# It opens /dev/usb/lp0 read/write to relay real printer status back to the POS.
+ExecStart=/usr/local/bin/p1-mitm
+Restart=always
+RestartSec=5
+
+# /run/pos-overlay/ is shared with P2-overlay service
+# Both services use RuntimeDirectory; the first to start creates it.
+RuntimeDirectory=pos-overlay
+RuntimeDirectoryMode=0755
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=p1-mitm
+
+# Must run as root: gadget configfs requires root, /dev/g_printer0 requires root
+User=root
+
+[Install]
+WantedBy=multi-user.target
